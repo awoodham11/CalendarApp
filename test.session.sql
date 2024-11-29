@@ -15,3 +15,9 @@ ALTER TABLE events
 ADD StartTime datetime;
 ALTER TABLE events
 ADD EndTime datetime;
+
+
+
+
+-- @block
+DELETE FROM Events WHERE Id = '1';

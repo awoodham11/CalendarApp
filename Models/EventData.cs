@@ -111,6 +111,19 @@ namespace CalendarApp.Models
             }
         }
 
+        public void DeleteEvent(int id)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "DELETE FROM Events WHERE Event_id = @Id";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
 
     }

@@ -80,10 +80,23 @@ namespace CalendarApp.Controllers
             return View(calendarEvent);
         }
 
-        [HttpPost]
-        public IActionResult EditEvent(int id){
+        [HttpGet("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var calendarEvent = _eventData.GetEventById(id);
+            if (calendarEvent == null)
+            {
+                return NotFound();
+            }
+            return View(calendarEvent);
+        }
 
-            return null;
+        [HttpPost("Delete/{id}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _eventData.DeleteEvent(id);
+            return RedirectToAction("Index"); // Redirect back to the calendar
         }
 
 

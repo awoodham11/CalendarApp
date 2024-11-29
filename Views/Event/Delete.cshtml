@@ -1,0 +1,18 @@
+@model CalendarApp.Models.Event
+
+<h2>Delete Event</h2>
+
+<p>Are you sure you want to delete this event?</p>
+
+<div>
+    <p><strong>Title:</strong> @Model.Title</p>
+    <p><strong>Start Time:</strong> @Model.StartTime.ToString("f")</p>
+    <p><strong>End Time:</strong> @Model.EndTime.ToString("f")</p>
+    <p><strong>Description:</strong> @Model.Description</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
