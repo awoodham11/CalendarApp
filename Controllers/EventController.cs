@@ -80,6 +80,12 @@ namespace CalendarApp.Controllers
             return View(calendarEvent);
         }
 
+        [HttpPost]
+        public IActionResult EditEvent(int id){
+
+            return null;
+        }
+
 
         [HttpGet("error")]
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -94,6 +94,23 @@ namespace CalendarApp.Models
             return null;
         }
 
+        public void UpdateEvent(Event calendarEvent)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "UPDATE Events SET Title = @UpdatedTitle, @StartTime, @EndTime, @Description WHERE Title = @Title";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Title", calendarEvent.Title);
+                    cmd.Parameters.AddWithValue("@StartTime", calendarEvent.StartTime);
+                    cmd.Parameters.AddWithValue("@EndTime", calendarEvent.EndTime);
+                    cmd.Parameters.AddWithValue("@Description", calendarEvent.Description);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
 
     }
