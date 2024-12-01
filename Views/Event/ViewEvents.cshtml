@@ -14,12 +14,18 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.StartTime</td>
-                <td>@item.EndTime</td>
-                <td>@item.Description</td>
-            </tr>
+            <a asp-action="EventDetails" asp-route-id="@item.Id" class="btn-link">
+                <tr>
+                    <td>
+
+                        @item.Title
+
+                    </td>
+                    <td>@item.StartTime</td>
+                    <td>@item.EndTime</td>
+                    <td>@item.Description</td>
+                </tr>
+            </a>
         }
     </tbody>
 </table>
