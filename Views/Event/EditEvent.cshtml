@@ -1,26 +1,20 @@
-@model CalendarApp.Models.Event
+@model IEnumerable<CalendarApp.Models.Event>
 
 <h2>Edit Event</h2>
 
-<form asp-action="EditEvent" method="post">
-    <div class="form-group">
-        <select>
-            @* Display some titles *@
+<form method="get" asp-action="EditEvent">
+    <div>
+        <label for="Id">Event Title</label>
+        <select id="Id" name="Id">
+            <option value="">Select Event</option>
+            @foreach (var event_title in ViewBag.Event)
+            {
+                <option value="@event_title.Id" selected="@(event_title.Id == ViewBag.SelectedEventId ? "selected" : null)">
+                    @event_title.Title
+                </option>
+            }
         </select>
+        <button type="submit">Edit Event</button>
     </div>
-    <div class="form-group">
-        <label for="Date">Start Time</label>
-        <input type="datetime-local" class="form-control" asp-for="StartTime" />
-    </div>
-    <div class="form-group">
-        <label for="Date">End Time</label>
-        <input type="datetime-local" class="form-control" asp-for="EndTime" />
-    </div>
-    <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" asp-for="Description"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
 </form>
-
 
