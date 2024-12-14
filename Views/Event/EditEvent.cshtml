@@ -1,20 +1,34 @@
-@model IEnumerable<CalendarApp.Models.Event>
+@model CalendarApp.Models.Event
 
 <h2>Edit Event</h2>
 
-<form method="get" asp-action="EditEvent">
-    <div>
-        <label for="Id">Event Title</label>
-        <select id="Id" name="Id">
-            <option value="">Select Event</option>
-            @foreach (var event_title in ViewBag.Event)
-            {
-                <option value="@event_title.Id" selected="@(event_title.Id == ViewBag.SelectedEventId ? "selected" : null)">
-                    @event_title.Title
-                </option>
-            }
-        </select>
-        <button type="submit">Edit Event</button>
-    </div>
-</form>
+<form asp-action="EditEvent" method="post">
+    <input type="hidden" asp-for="Id" />
 
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartTime" class="control-label">Start Time</label>
+        <input asp-for="StartTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndTime" class="control-label">End Time</label>
+        <input asp-for="EndTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -100,6 +100,36 @@ namespace CalendarApp.Controllers
         }
 
 
+        [HttpGet("EditEvent/{id}")]
+        public IActionResult EditEvent(int id)
+        {
+            var calendarEvent = _eventData.GetEventById(id); // Fetch the event by ID
+            if (calendarEvent == null)
+            {
+                return NotFound();
+            }
+            return View(calendarEvent); // Pass the event to the edit view
+        }
+
+        [HttpPost("EditEvent/{id}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditEvent(int id, Event updatedEvent)
+        {
+            if (id != updatedEvent.Id)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _eventData.UpdateEvent(updatedEvent); // Update the event in the database
+                return RedirectToAction("Index"); // Redirect back to the calendar or list page
+            }
+
+            return View(updatedEvent); // Return the same view with validation errors if invalid
+        }
+
+
         [HttpGet("error")]
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

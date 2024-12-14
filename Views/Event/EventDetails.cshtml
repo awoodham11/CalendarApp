@@ -7,11 +7,11 @@
 <p><strong>End Time:</strong> @Model.EndTime.ToString("f")</p>
 <p><strong>Description:</strong> @Model.Description</p>
 
-<a href="/event/editevent" class="btn btn-danger">Edit Event</a>
-<br/>
-<br/>
+<a asp-action="EditEvent" asp-route-id="@Model.Id" class="btn btn-primary">Edit Event</a>
+@* <a href="/event/editevent" class="btn btn-danger">Edit Event</a> *@
+<br />
+<br />
 <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete Event</a>
-<br/>
-<br/>
+<br />
+<br />
 <a href="/event" class="btn btn-danger">Back to Calendar</a>
-

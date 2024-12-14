@@ -99,9 +99,10 @@ namespace CalendarApp.Models
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "UPDATE Events SET Title = @UpdatedTitle, @StartTime, @EndTime, @Description WHERE Title = @Title";
+                var query = "UPDATE Events SET Title = @Title, StartTime = @StartTime, EndTime = @EndTime, Description = @Description WHERE Event_id = @Id";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
+                    cmd.Parameters.AddWithValue("@Id", calendarEvent.Id);
                     cmd.Parameters.AddWithValue("@Title", calendarEvent.Title);
                     cmd.Parameters.AddWithValue("@StartTime", calendarEvent.StartTime);
                     cmd.Parameters.AddWithValue("@EndTime", calendarEvent.EndTime);
